@@ -123,10 +123,13 @@ RSpec.describe Flotilla do
     end
 
     it "can tell personnel by ship" do
+      @seventh_flotilla.add_ship(@daedalus)
+      @seventh_flotilla.add_ship(@odyssey)
       expected = {
                   @daedalus => [@kathy, @sampson],
                   @odyssey => [@polly]
                 }
+
       expect(@seventh_flotilla.personnel_by_ship).to eq(expected)
     end
   end

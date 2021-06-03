@@ -30,4 +30,13 @@ class Flotilla
       person.experience >= ship_requirement_num.values[0]
     end
   end
+
+  def personnel_by_ship
+    persons_by_ship = {}
+    # binding.pry
+    @ships.select do |ship|
+      persons_by_ship[ship] = recommend_personnel(ship)
+    end
+    persons_by_ship
+  end
 end
