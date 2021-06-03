@@ -1,5 +1,3 @@
-require 'pry'
-
 class Flotilla
   attr_reader :name, :personnel, :ships
 
@@ -43,10 +41,8 @@ class Flotilla
     ship_with_personnel = personnel_by_ship.select do |ship, personnel|
       personnel != []
     end
-    ship_that_is_ready = []
-    if ship_with_personnel.keys[0].fuel > fuel
-      ship_that_is_ready << ship_with_personnel.keys[0]
+    ship_with_personnel.keys.select do |ship|
+      ship.fuel > fuel
     end
-    ship_that_is_ready
   end
 end
