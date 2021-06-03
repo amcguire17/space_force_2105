@@ -23,14 +23,14 @@ RSpec.describe Flotilla do
     end
 
     it "spacecraft starts with no requirements" do
-      expect(@daedalus).to eq([])
+      expect(@daedalus.requirements).to eq([])
     end
 
     it "spacecraft can have requirements added" do
       @daedalus.add_requirement({astrophysics: 6})
       @daedalus.add_requirement({quantum_mechanics: 3})
 
-      expect(@daedalus.requirements).to eq({astrophysics: 6}, {quantum_mechanics: 3})
+      expect(@daedalus.requirements).to eq([{astrophysics: 6}, {quantum_mechanics: 3}])
     end
 
     it "exists" do
@@ -59,12 +59,26 @@ RSpec.describe Flotilla do
     end
 
     it "can recommend personnel to spacecraft" do
+      @daedalus.add_requirement({astrophysics: 6})
+      @daedalus.add_requirement({quantum_mechanics: 3})
+      @seventh_flotilla.add_ship(@daedalus)
+      @seventh_flotilla.add_personnel(@kathy)
+      @seventh_flotilla.add_personnel(@polly)
+      @seventh_flotilla.add_personnel(@rover)
+      @seventh_flotilla.add_personnel(@sampson)
+
       expect(@seventh_flotilla.recommend_personnel(@daedalus)).to eq([@kathy, @sampson])
     end
 
     it "can reccomend personnel to another spacecraft" do
       @odyssey.add_requirement({operations: 6})
       @odyssey.add_requirement({maintenance: 3})
+      @seventh_flotilla.add_ship(@oddyssey)
+      @seventh_flotilla.add_personnel(@kathy)
+      @seventh_flotilla.add_personnel(@polly)
+      @seventh_flotilla.add_personnel(@rover)
+      @seventh_flotilla.add_personnel(@sampson)
+
 
       expect(@seventh_flotilla.recommend_personnel(@odyssey)).to eq([@polly])
     end
