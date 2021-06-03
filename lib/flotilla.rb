@@ -38,4 +38,15 @@ class Flotilla
     end
     persons_by_ship
   end
+
+  def ready_ships(fuel)
+    ship_with_personnel = personnel_by_ship.select do |ship, personnel|
+      personnel != []
+    end
+    ship_that_is_ready = []
+    if ship_with_personnel.keys[0].fuel > fuel
+      ship_that_is_ready << ship_with_personnel.keys[0]
+    end
+    ship_that_is_ready
+  end
 end
