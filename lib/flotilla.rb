@@ -33,7 +33,6 @@ class Flotilla
 
   def personnel_by_ship
     persons_by_ship = {}
-    # binding.pry
     @ships.select do |ship|
       persons_by_ship[ship] = recommend_personnel(ship)
     end

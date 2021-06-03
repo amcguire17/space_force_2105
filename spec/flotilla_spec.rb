@@ -133,4 +133,36 @@ RSpec.describe Flotilla do
       expect(@seventh_flotilla.personnel_by_ship).to eq(expected)
     end
   end
+
+  describe "Iteration 4" do
+    it "can ready ships" do
+      daedalus = Spacecraft.new({name: 'Daedalus', fuel: 400})
+      daedalus.add_requirement({astrophysics: 6})
+      daedalus.add_requirement({quantum_mechanics: 3})
+      prometheus = Spacecraft.new({name: 'Prometheus', fuel: 300})
+      prometheus.add_requirement({operations: 6})
+      prometheus.add_requirement({science: 3})
+      seventh_flotilla = Flotilla.new({designation: 'Seventh Flotilla'})
+      kathy = Person.new('Kathy Chan', 10)
+      kathy.add_specialty(:astrophysics)
+      kathy.add_specialty(:quantum_mechanics)
+      polly = Person.new('Polly Parker', 4)
+      polly.add_specialty(:operations)
+      polly.add_specialty(:maintenance)
+      rover = Person.new('Rover Henriette', 1)
+      rover.add_specialty(:operations)
+      rover.add_specialty(:maintenance)
+      sampson = Person.new('Sampson Edwards', 7)
+      sampson.add_specialty(:astrophysics)
+      sampson.add_specialty(:quantum_mechanics)
+      seventh_flotilla.add_personnel(kathy)
+      seventh_flotilla.add_personnel(polly)
+      seventh_flotilla.add_personnel(rover)
+      seventh_flotilla.add_personnel(sampson)
+      seventh_flotilla.add_ship(daedalus)
+      seventh_flotilla.add_ship(prometheus)
+
+      expect(seventh_flotilla.ready_ships(100)).to eq([daedalus])
+    end
+  end
 end
